@@ -1,0 +1,6 @@
+.vs/
+ToDo_v2/
+x64/
+*.exe
+*.vcxproj.user
+.vscode/
