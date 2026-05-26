@@ -1,6 +1,19 @@
+# Visual Studio
 .vs/
-ToDo_v2/
-x64/
-*.exe
 *.vcxproj.user
+
+# Build outputs
+Debug/
+Release/
+x64/
+ToDo_v2/
+bin/
+
+# Compiled files
+*.obj
+*.exe
+*.pdb
+*.ilk
+
+# VSCode
 .vscode/
