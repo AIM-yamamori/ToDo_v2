@@ -1,7 +1,6 @@
 #include "TaskManager.h"
 #include <iostream>
 
-
 // タスク追加
 void TaskManager::addTask(const std::string& title) {
 	Task task;

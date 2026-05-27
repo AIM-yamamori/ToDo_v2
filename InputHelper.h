@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Menu.h"
+
 class InputHelper {
 private:
 	// メニュー番号　最小値
@@ -12,7 +14,13 @@ private:
 	static constexpr int IGNORE_MAX = 10000;
 public:
 	// メニュー入力
-	int inputMenu();
+	Menu inputMenu();
+
+	// stringからカンマがあるかチェック
+	bool containsComma(const std::string& text);
+
+	// stringから空白・タブのみであるかチェック
+	bool isBlankOnly(const std::string& text);
 
 	// タスク名入力
 	std::string inputTitle();
@@ -21,5 +29,11 @@ public:
 	size_t inputIndex(size_t maxIndex);
 
 	// min~max内の有効なindexを入力から得る
-	int inputNumber(int min, int max);
+	int inputNumber(const int min, const int max);
+
+	// メッセージ表示後に有効なindexを入力
+	size_t promptIndex(
+		size_t taskCount,
+		const std::string& message
+	);
 };

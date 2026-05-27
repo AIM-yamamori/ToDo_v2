@@ -18,7 +18,7 @@ public:
     void setTitle(const std::string& newTitle);
 
     // タスク名取得
-    std::string getTitle() const;
+    const std::string getTitle() const;
 
     // 完了状態切替
     void toggleDone();

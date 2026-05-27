@@ -1,0 +1,11 @@
+#pragma once
+
+enum class Menu {
+	EXIT = 0,
+	ADD_TASK,
+	SHOW_TASKS,
+	REMOVE_TASK,
+	TOGGLE_TASK,
+	EDIT_TASK,
+	SAVE_TASKS
+};

@@ -1,76 +1,77 @@
 #include <iostream>
 #include <string>
 #include "InputHelper.h"
+#include "Menu.h"
 
 // メニュー入力
-int InputHelper::inputMenu() {
+Menu InputHelper::inputMenu() {
 	// 有効なindex値を返す
-	return inputNumber(MENU_MAX, MENU_MAX);
+	return static_cast<Menu>(inputNumber(MENU_MIN, MENU_MAX));
 }
-
 
 // タスク名入力
 std::string InputHelper::inputTitle() {
-	std::string inputTitle;
+	std::string title;
 
 	while (true) {
 		// タスク名を入力から読み取る
-		std::getline(std::cin, inputTitle);
+		std::getline(std::cin, title);
 
 		// 空であるか
-		if (inputTitle.empty()) {
+		if (title.empty()) {
 			std::cout << "空はNGです。再入力> ";
 
-			// 入力やり直しへ
 			continue;
 		}
 
-		// スペース以外をfalseとする
-		bool hasNonSpace = false;
-
-		// カンマではない場合をfalseとする
-		bool hasComma = false;
-
-		// 文字列を一文字ずつチェック
-		for (char c : inputTitle) {
-			if (c != ' ' && c != '\t') {
-				// スペース以外を検出
-				hasNonSpace = true;
-			}
-
-			if (c == ',') {
-				// カンマを検出
-				hasComma = true;
-			}
-		}
-
-		// スペースのみの場合、再入力へ
-		if (!hasNonSpace) {
+		// スペースのみであるかチェック
+		if (isBlankOnly(title)) {
 			std::cout << "空白のみはNGです。再入力> ";
 
-			// 入力やり直しへ
 			continue;
 		}
 
-		// カンマを含む場合、再入力へ
-		if (hasComma) {
+		// カンマを含むかチェック
+		if (containsComma(title)) {
 			std::cout << "カンマを含む文字列はNGです。再入力> ";
 
-			// 入力やり直しへ
 			continue;
 		}
 
-		break;
+		// タスク名文字列を返す
+		return title;
 	}
-
-	// タスク名文字列を返す
-	return inputTitle;
 }
 
+// stringからカンマがあるかチェック
+bool InputHelper::containsComma(const std::string& text) {
+	// 文字列を一文字ずつチェック
+	for (const char c : text) {
+		if (c == ',') {
+			// カンマを検出
+			return true;
+		}
+	}
+
+	return false;
+}
+
+// stringから空白・タブのみであるかチェック
+bool InputHelper::isBlankOnly(const std::string& text) {
+	// 文字列を一文字ずつチェック
+	for (const char c : text) {
+		if (c != ' ' && c != '\t') {
+			// スペース以外がある
+			return false;
+		}
+	}
+
+	return true;
+}
 
 // index入力
-size_t InputHelper::inputIndex(size_t maxIndex) {
-
+size_t InputHelper::inputIndex(const size_t maxIndex) {
+	// 最大値が0はNG
 	if (maxIndex == 0) {
 		return 0;
 	}
@@ -79,16 +80,21 @@ size_t InputHelper::inputIndex(size_t maxIndex) {
 	return static_cast<size_t>(inputNumber(0, static_cast<int>(maxIndex - 1)));
 }
 
-
-int InputHelper::inputNumber(int min, int max) {
+// min～max の範囲内の整数が入力されるまで繰り返す
+int InputHelper::inputNumber(
+	const int min,
+	const int max
+) {
 	int input;
 
 	while (true) {
-
-		// 数値判定
+		// 数値として入力できたかチェック
 		if (!(std::cin >> input)) {
 
+			// エラー状態を解除
 			std::cin.clear();
+
+			// 不正入力をバッファから破棄
 			std::cin.ignore(IGNORE_MAX, '\n');
 
 			std::cout
@@ -97,10 +103,10 @@ int InputHelper::inputNumber(int min, int max) {
 			continue;
 		}
 
-		// バッファ破棄
+		// 入力後の余分な文字を破棄
 		std::cin.ignore(IGNORE_MAX, '\n');
 
-		// 範囲チェック
+		// 指定範囲内かチェック
 		if (input < min || input > max) {
 
 			std::cout
@@ -112,7 +118,17 @@ int InputHelper::inputNumber(int min, int max) {
 			continue;
 		}
 
-		// 有効なindex値を返す
+		// 条件を満たした数値を返す
 		return input;
 	}
+}
+
+// メッセージ表示後に有効なindexを入力
+size_t InputHelper::promptIndex(
+	size_t taskCount,
+	const std::string& message
+) {
+	std::cout << message;
+
+	return inputIndex(taskCount);
 }

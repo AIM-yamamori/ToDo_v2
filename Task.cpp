@@ -18,7 +18,7 @@ void Task::setTitle(const std::string& newTitle) {
 
 
 // タスク名取得
-std::string Task::getTitle() const {
+const std::string Task::getTitle() const {
     // タスク名を返す
     return title;
 }
