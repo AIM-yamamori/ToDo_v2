@@ -6,8 +6,14 @@
 
 
 // コンストラクタ
-Task::Task() {
-    done = false;
+Task::Task(
+    const std::string& title,
+    Priority priority
+)
+    : title(title),
+    done(false),
+    priority(priority)
+{
 }
 
 
@@ -35,4 +41,14 @@ void Task::toggleDone() {
 bool Task::isDone() const {
     // 完了状態を返す
     return done;
+}
+
+// 優先度取得
+Priority Task::getPriority() const {
+    return priority;
+}
+
+// 優先度を変更
+void Task::setPriority(Priority newPriority) {
+    priority = newPriority;
 }

@@ -10,7 +10,7 @@ private:
 
 public:
 	// タスク追加
-	void addTask(const std::string& title);
+	void addTask(const std::string& title, Priority priority);
 
 	// タスク削除
 	bool removeTask(size_t index);

@@ -2,6 +2,12 @@
 
 #include <string>
 
+enum class Priority {
+    LOW,
+    MEDIUM,
+    HIGH
+};
+
 class Task {
 private:
     // タスク名
@@ -10,9 +16,15 @@ private:
     // 完了状態
     bool done;
 
+    // 優先度
+    Priority priority;
+    
 public:
     // コンストラクタ
-    Task();
+    Task(
+        const std::string& title,
+        Priority priority
+    );
 
     // タスク名変更
     void setTitle(const std::string& newTitle);
@@ -25,4 +37,10 @@ public:
 
     // 完了状態確認
     bool isDone() const;
+
+    // 優先度取得
+    Priority getPriority() const;
+
+    // 優先度を変更
+    void setPriority(Priority priority);
 };

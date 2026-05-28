@@ -1,4 +1,6 @@
 #include "CsvManager.h"
+#include "PriorityUtils.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -18,7 +20,13 @@ bool CsvManager::saveTasks(const std::vector<Task>& tasks) {
 
 	// タスクすべてを一行ずつcsvに書き込む
 	for (size_t i = 0; i < tasks.size(); ++i) {
-		file << (tasks[i].isDone() ? 1 : 0) << "," << tasks[i].getTitle() << "\n";
+        file
+            << (tasks[i].isDone() ? 1 : 0)
+            << ","
+            << PriorityUtils::toString(tasks[i].getPriority())
+            << ","
+            << tasks[i].getTitle()
+            << "\n";
 	}
 
 	// ファイルを閉じる
@@ -52,16 +60,19 @@ bool CsvManager::loadTasks(std::vector<Task>& tasks) {
         std::stringstream ss(line);
 
         std::string doneStr;
+        std::string priorityStr;
         std::string title;
-
+        
         // カンマ区切りで取得
         if (!std::getline(ss, doneStr, ',')) {
-            std::getline(ss, doneStr, ',');
+            continue;
+        }
+
+        if (!std::getline(ss, priorityStr, ',')) {
             continue;
         }
 
         if (!std::getline(ss, title)) {
-            std::getline(ss, title);
             continue;
         }
 
@@ -76,10 +87,10 @@ bool CsvManager::loadTasks(std::vector<Task>& tasks) {
         }
 
         // Task生成
-        Task task;
-
-        // タスク名設定
-        task.setTitle(title);
+        Task task(
+            title,
+            PriorityUtils::fromString(priorityStr)
+        );
 
         // 完了状態設定
         if (doneStr == "1") {

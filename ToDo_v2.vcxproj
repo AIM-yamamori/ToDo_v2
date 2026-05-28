@@ -133,6 +133,7 @@
     <ClCompile Include="CsvManager.cpp" />
     <ClCompile Include="InputHelper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PriorityUtils.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskHandlers.cpp" />
     <ClCompile Include="TaskManager.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="ConsoleView.h" />
     <ClInclude Include="CsvManager.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="PriorityUtils.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskHandlers.h" />
     <ClInclude Include="TaskManager.h" />

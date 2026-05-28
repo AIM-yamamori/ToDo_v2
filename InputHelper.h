@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Menu.h"
+#include "Task.h"
 
 class InputHelper {
 private:
@@ -36,4 +37,7 @@ public:
 		size_t taskCount,
 		const std::string& message
 	);
+
+	// 優先度入力
+	Priority inputPriority();
 };

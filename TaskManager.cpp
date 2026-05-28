@@ -1,15 +1,11 @@
 #include "TaskManager.h"
+#include "Task.h"
 #include <iostream>
 
 // タスク追加
-void TaskManager::addTask(const std::string& title) {
-	Task task;
-
-	// タスク名を入力・反映
-	task.setTitle(title);
-
-	// tasks配列に追加
-	tasks.push_back(task);
+void TaskManager::addTask(const std::string& title, Priority priority) {
+	// title と priority を指定した Task を tasks に追加
+	tasks.push_back(Task(title, priority));
 }
 
 // タスク削除

@@ -1,4 +1,5 @@
 #include "ConsoleView.h"
+#include "PriorityUtils.h"
 #include <iostream>
 #include <vector>
 
@@ -45,11 +46,20 @@ void ConsoleView::showSuccess(const std::string& message) {
 
 // タスク1件表示
 void ConsoleView::showTask(size_t index, const Task& task) {
+	// 優先度を取得しテキスト形式に
+	const std::string priorityText =
+		PriorityUtils::toString(task.getPriority());
+
 	std::cout 
-	<< index 
-	<< ": " 
-	<< (task.isDone() ? "[x]" : "[ ]") 
-	<< " " 
-	<< task.getTitle() 
-	<< std::endl;
+		<< index 
+		<< ":"
+		<< " "
+		<< (task.isDone() ? "[x]" : "[ ]")
+		<< " "
+		<< "["
+		<< priorityText 
+		<< "]" 
+		<< " "
+		<< task.getTitle() 
+		<< std::endl;
 }

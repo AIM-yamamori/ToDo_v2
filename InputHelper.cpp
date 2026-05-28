@@ -2,6 +2,7 @@
 #include <string>
 #include "InputHelper.h"
 #include "Menu.h"
+#include "Task.h"
 
 // メニュー入力
 Menu InputHelper::inputMenu() {
@@ -131,4 +132,31 @@ size_t InputHelper::promptIndex(
 	std::cout << message;
 
 	return inputIndex(taskCount);
+}
+
+// 優先度入力
+Priority InputHelper::inputPriority() {
+
+	std::cout << "優先度を選択" << std::endl;
+	std::cout << "0: LOW" << std::endl;
+	std::cout << "1: MEDIUM" << std::endl;
+	std::cout << "2: HIGH" << std::endl;
+	std::cout << "> " << std::endl;
+
+	// 0~2の間で入力
+	const int input = inputNumber(0, 2);
+
+	switch (input) {
+	case 0:
+		// 低
+		return Priority::LOW;
+	case 1:
+		// 中
+		return Priority::MEDIUM;
+	case 2:
+		// 高
+		return Priority::HIGH;
+	default:
+		return Priority::MEDIUM;
+	}
 }

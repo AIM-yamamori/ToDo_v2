@@ -48,7 +48,13 @@ void handleAddTask(
 	std::cout << "追加するタスク名を入力> ";
 
 	// タスク追加実行
-	manager.addTask(inputHelper.inputTitle());
+	const std::string title =
+		inputHelper.inputTitle();
+
+	const Priority priority =
+		inputHelper.inputPriority();
+
+	manager.addTask(title, priority);
 
 	// 成功メッセージ
 	view.showSuccess("以下のタスクを追加しました");
