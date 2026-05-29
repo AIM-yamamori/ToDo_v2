@@ -1,5 +1,6 @@
 #pragma once
 
+// ƒƒjƒ…[
 enum class Menu {
 	EXIT = 0,
 	ADD_TASK,

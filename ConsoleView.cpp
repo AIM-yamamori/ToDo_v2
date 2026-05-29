@@ -64,3 +64,12 @@ void ConsoleView::showTask(size_t index, const Task& task) {
 		<< task.getTitle() 
 		<< std::endl;
 }
+
+// 並び変え方法メニュー表示
+void ConsoleView::showSortMenu() {
+	std::cout << "メ並び変え方法を選択" << std::endl;
+	std::cout << "1: 優先度順" << std::endl;
+	std::cout << "2: タスク名順" << std::endl;
+	std::cout << "3: 完了状態順" << std::endl;
+	std::cout << ">";
+}

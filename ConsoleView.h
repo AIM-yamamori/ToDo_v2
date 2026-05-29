@@ -19,4 +19,7 @@ public:
 
 	// タスク1件表示
 	void showTask(size_t index, const Task& task);
+
+	// 並び変え方法メニュー表示
+	void showSortMenu();
 };

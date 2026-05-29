@@ -1,6 +1,7 @@
 #include "TaskManager.h"
 #include "Task.h"
 #include <iostream>
+#include <algorithm>
 
 // タスク追加
 void TaskManager::addTask(const std::string& title, Priority priority) {
@@ -111,4 +112,44 @@ std::vector<Task> TaskManager::searchTasks(const std::string& keyword) const {
 	}
 
 	return results;
+}
+
+// タスクをソート
+void TaskManager::sortTasks(SortType type) {
+	switch (type) {
+
+	case SortType::PRIORITY:
+		// 優先度が高い順に並び替え
+		std::sort(
+			tasks.begin(),
+			tasks.end(),
+			[](const Task& a, const Task& b) {
+				return a.getPriority() > b.getPriority();
+			}
+		);
+
+		break;
+	case SortType::TITLE:
+		// タスク名の昇順で並び替え
+		std::sort(
+			tasks.begin(),
+			tasks.end(),
+			[](const Task& a, const Task& b) {
+				return a.getTitle() < b.getTitle();
+			}
+		);
+
+		break;
+	case SortType::DONE:
+		// 完了タスクを先頭に並び変え
+		std::sort(
+			tasks.begin(),
+			tasks.end(),
+			[](const Task& a, const Task& b) {
+				return a.isDone() > b.isDone();
+			}
+		);
+
+		break;
+	}
 }

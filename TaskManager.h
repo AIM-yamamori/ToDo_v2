@@ -41,4 +41,14 @@ public:
 
 	// タスク名にキーワードを含むタスクを検索
 	std::vector<Task> searchTasks(const std::string& keyword) const;
+
+	// 指定された条件でタスクを並び替え
+	void sortTasks(SortType type);
+};
+
+// タスクの並び変え方法
+enum class SortType {
+	PRIORITY, // 優先度順
+	TITLE, // タスク名順
+	DONE // 完了状態順
 };

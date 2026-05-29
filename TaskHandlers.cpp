@@ -241,3 +241,45 @@ void handleSearchTask(
 	// 検索結果表示
 	view.showTasks(results);
 }
+
+// 優先度順でソート
+void handleSortTasks(
+	TaskManager& manager,
+	InputHelper& inputHelper,
+	ConsoleView& view
+) {
+	// 並び変え方法メニュー表示
+	view.showSortMenu();
+
+	// 並び変え方法を選択
+	const int sortNumber =
+		inputHelper.inputNumber(1, 3);
+
+	SortType sortType;
+
+	switch (sortNumber) {
+		case 1:
+			// 優先度順
+			sortType = SortType::PRIORITY;
+
+			break;
+		case 2:
+			// タスク名順
+			sortType = SortType::TITLE;
+
+			break;
+		case 3:
+			// 完了状態順
+			sortType = SortType::DONE;
+
+			break;
+	}
+
+	// sortTypeに応じて並び変え実行
+	manager.sortTasks(sortType);
+
+	view.showSuccess("タスクを並び替えました");
+	
+	// ソート結果一覧表示
+	view.showTasks(manager.getTasks());
+}
