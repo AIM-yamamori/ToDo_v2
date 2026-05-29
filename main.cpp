@@ -100,6 +100,12 @@ void runMenuLoop(
 
 			break;
 		}
+		case Menu::SEARCH_TASK: {
+			// タスク検索
+			handleSearchTask(manager, inputHelper, view);
+
+			break;
+		}
 		}
 	}
 }

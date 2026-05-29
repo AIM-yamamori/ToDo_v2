@@ -13,6 +13,7 @@ void ConsoleView::showMenu() {
 	std::cout << "4: 完了状態切り替え" << std::endl;
 	std::cout << "5: タスク名編集" << std::endl;
 	std::cout << "6: csvに保存" << std::endl;
+	std::cout << "7: タスク検索" << std::endl;
 	std::cout << ">";
 }
 

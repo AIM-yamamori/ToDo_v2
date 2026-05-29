@@ -9,7 +9,7 @@ private:
 	static constexpr int MENU_MIN = 0;
 
 	// メニュー番号　最大値
-	static constexpr int MENU_MAX = 6;
+	static constexpr int MENU_MAX = 7;
 
 	// cin.ignore() で破棄する最大文字数
 	static constexpr int IGNORE_MAX = 10000;

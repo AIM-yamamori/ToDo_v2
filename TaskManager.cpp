@@ -95,3 +95,20 @@ bool TaskManager::isValidIndex(size_t index) const {
 
 	return true;
 }
+
+// タスク名にキーワードを含むタスクを検索
+std::vector<Task> TaskManager::searchTasks(const std::string& keyword) const {
+	// 検索結果を格納する用
+	std::vector<Task> results;
+
+	// tasks全タスクを検索
+	for (const Task& task : tasks) {
+		// キーワードを含む場合
+		if (task.getTitle().find(keyword) != std::string::npos) {
+			// 検索結果に追加
+			results.push_back(task);
+		}
+	}
+
+	return results;
+}

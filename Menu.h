@@ -7,5 +7,6 @@ enum class Menu {
 	REMOVE_TASK,
 	TOGGLE_TASK,
 	EDIT_TASK,
-	SAVE_TASKS
+	SAVE_TASKS,
+	SEARCH_TASK
 };

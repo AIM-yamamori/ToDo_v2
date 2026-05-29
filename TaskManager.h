@@ -38,4 +38,7 @@ public:
 
 	// index範囲チェック
 	bool isValidIndex(size_t index) const;
+
+	// タスク名にキーワードを含むタスクを検索
+	std::vector<Task> searchTasks(const std::string& keyword) const;
 };

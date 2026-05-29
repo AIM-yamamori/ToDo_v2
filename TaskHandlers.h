@@ -72,3 +72,10 @@ void showSingleTask(
 	size_t index,
 	const Task& task
 );
+
+// タスク検索
+void handleSearchTask(
+	TaskManager& manager,
+	InputHelper& inputHelper,
+	ConsoleView& view
+);

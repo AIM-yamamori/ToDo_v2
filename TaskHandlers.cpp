@@ -213,3 +213,31 @@ void showSingleTask(
 ) {
 	view.showTask(index, task);
 }
+
+// タスク検索
+void handleSearchTask(
+	TaskManager& manager,
+	InputHelper& inputHelper,
+	ConsoleView& view
+) {
+	std::cout << "検索文字列を入力> ";
+
+	// 検索キーワード入力
+	const std::string keyword =
+		inputHelper.inputTitle();
+
+	// 検索を実行
+	const std::vector<Task> results = manager.searchTasks(keyword);
+
+	// 検索結果が0件の場合
+	if (results.empty()) {
+		view.showError("該当タスクなし");
+		return;
+	}
+
+	// 成功メッセージ
+	view.showSuccess("検索結果は以下の通りです");
+
+	// 検索結果表示
+	view.showTasks(results);
+}
