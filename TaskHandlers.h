@@ -79,3 +79,10 @@ void handleSearchTask(
 	InputHelper& inputHelper,
 	ConsoleView& view
 );
+
+// 優先度順でソート
+void handleSortTasks(
+	TaskManager& manager,
+	InputHelper& inputHelper,
+	ConsoleView& view
+);

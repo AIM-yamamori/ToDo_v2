@@ -107,7 +107,8 @@ void runMenuLoop(
 			break;
 		}
 		case Menu::SORT_TASKS: {
-			// タスクソート
+			// タスク並び変え
+			handleSortTasks(manager, inputHelper, view);
 
 			break;
 		}

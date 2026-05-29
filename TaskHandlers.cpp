@@ -7,17 +7,23 @@ void handleLoadTasks(
 	CsvManager& csvManager,
 	ConsoleView& view
 ) {
-	if (csvManager.loadTasks(manager.getTasks())) {
-		// 成功時
-		view.showSuccess("csvからタスクを読み込みました");
-
-		// タスク一覧表示
-		showTaskList(manager.getTasks(), view);
-	}
-	else {
-		// 失敗時
+	// 読み込み失敗
+	if (!csvManager.loadTasks(manager.getTasks())) {
 		view.showError("csvからタスクを読み込めませんでした");
+		return;
 	}
+
+	// 読み込み成功 タスクが0件
+	if (manager.isEmpty()) {
+		view.showSuccess("csvを読み込みました（タスク0件）");
+		return;
+	}
+
+	// 読み込み成功 タスクが1件以上
+	view.showSuccess("csvからタスクを読み込みました");
+
+	// 一覧表示
+	showTaskList(manager.getTasks(), view);view.showError("csvからタスクを読み込めませんでした");
 }
 
 // csv 保存
@@ -173,28 +179,17 @@ bool showTasksAndValidateNotEmpty(
 	const TaskManager& manager,
 	ConsoleView& view
 ) {
-	// 一覧表示
-	showTaskList(manager.getTasks(), view);
-
 	// タスク空チェック
 	if (manager.isEmpty()) {
 		view.showError("タスクがありません");
 		return false;
 	}
 
+	// 一覧表示
+	showTaskList(manager.getTasks(), view);
+
 	return true;
 }
-
-// index入力 有効なindex値を返す
-//size_t promptTaskIndex(
-//	InputHelper& inputHelper,
-//	size_t taskCount,
-//	const std::string& message
-//) {
-//	std::cout << message;
-//
-//	return inputHelper.inputIndex(taskCount);
-//}
 
 // タスク一覧表示
 void showTaskList(
@@ -220,11 +215,15 @@ void handleSearchTask(
 	InputHelper& inputHelper,
 	ConsoleView& view
 ) {
+	// タスク空チェック と 一覧表示
+	if (!showTasksAndValidateNotEmpty(manager, view)) {
+		return;
+	}
+	
 	std::cout << "検索文字列を入力> ";
 
 	// 検索キーワード入力
-	const std::string keyword =
-		inputHelper.inputTitle();
+	const std::string keyword = inputHelper.inputTitle();
 
 	// 検索を実行
 	const std::vector<Task> results = manager.searchTasks(keyword);
@@ -248,15 +247,21 @@ void handleSortTasks(
 	InputHelper& inputHelper,
 	ConsoleView& view
 ) {
+	// タスク空チェック と 一覧表示
+	if (!showTasksAndValidateNotEmpty(manager, view)) {
+		return;
+	}
+	
 	// 並び変え方法メニュー表示
 	view.showSortMenu();
 
 	// 並び変え方法を選択
-	const int sortNumber =
-		inputHelper.inputNumber(1, 3);
+	const int sortNumber = inputHelper.inputNumber(1, 3);
 
+	// 並び変え方法を格納用
 	SortType sortType;
 
+	// 入力値に応じて原び変え方法を設定
 	switch (sortNumber) {
 		case 1:
 			// 優先度順
@@ -278,6 +283,7 @@ void handleSortTasks(
 	// sortTypeに応じて並び変え実行
 	manager.sortTasks(sortType);
 
+	// 成功メッセージ
 	view.showSuccess("タスクを並び替えました");
 	
 	// ソート結果一覧表示

@@ -3,6 +3,13 @@
 #include "Task.h"
 #include <vector>
 
+// タスクの並び変え方法
+enum class SortType {
+	PRIORITY, // 優先度順
+	TITLE, // タスク名順
+	DONE // 完了状態順
+};
+
 class TaskManager {
 private:
 	// タスク管理配列
@@ -14,9 +21,6 @@ public:
 
 	// タスク削除
 	bool removeTask(size_t index);
-
-	// タスク一覧表示
-	//void showTasks() const;
 
 	// タスク名変更
 	bool editTask(size_t index, const std::string& title);
@@ -44,11 +48,4 @@ public:
 
 	// 指定された条件でタスクを並び替え
 	void sortTasks(SortType type);
-};
-
-// タスクの並び変え方法
-enum class SortType {
-	PRIORITY, // 優先度順
-	TITLE, // タスク名順
-	DONE // 完了状態順
 };

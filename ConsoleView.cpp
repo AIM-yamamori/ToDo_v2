@@ -14,17 +14,12 @@ void ConsoleView::showMenu() {
 	std::cout << "5: タスク名編集" << std::endl;
 	std::cout << "6: csvに保存" << std::endl;
 	std::cout << "7: タスク検索" << std::endl;
+	std::cout << "8: タスク並び変え" << std::endl;
 	std::cout << ">";
 }
 
 // タスク一覧表示
 void ConsoleView::showTasks(const std::vector<Task>& tasks) {
-	// tasksが空である場合
-	if (tasks.empty()) {
-		std::cout << "タスクが空です" << std::endl;
-		return;
-	}
-
 	std::cout << "--- タスク一覧 (" << tasks.size() << "件) ---" << std::endl;
 
 	// 全タスクを表示
@@ -67,7 +62,7 @@ void ConsoleView::showTask(size_t index, const Task& task) {
 
 // 並び変え方法メニュー表示
 void ConsoleView::showSortMenu() {
-	std::cout << "メ並び変え方法を選択" << std::endl;
+	std::cout << "並び変え方法を選択" << std::endl;
 	std::cout << "1: 優先度順" << std::endl;
 	std::cout << "2: タスク名順" << std::endl;
 	std::cout << "3: 完了状態順" << std::endl;
