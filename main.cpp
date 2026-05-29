@@ -106,6 +106,11 @@ void runMenuLoop(
 
 			break;
 		}
+		case Menu::SORT_TASKS: {
+			// タスクソート
+
+			break;
+		}
 		}
 	}
 }
